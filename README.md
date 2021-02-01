@@ -44,8 +44,6 @@ The database is configured!
 
 # Start the server:
 nodemon server.js
-or
-node server.js
 
 # See the project:
 http://localhost:8081
