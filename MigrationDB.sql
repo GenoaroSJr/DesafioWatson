@@ -21,6 +21,11 @@ SET time_zone = "+00:00";
 -- Banco de dados: `comments`
 --
 
+DROP DATABASE comments;
+CREATE DATABASE comments;
+
+
+USE comments;
 -- --------------------------------------------------------
 
 --
