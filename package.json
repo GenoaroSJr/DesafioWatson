@@ -1,26 +1,28 @@
 {
-  "name": "desafiowatson",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/GenoaroSJr/DesafioWatson.git"
-  },
-  "author": "GenoaroSJr",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/GenoaroSJr/DesafioWatson/issues"
-  },
-  "homepage": "https://github.com/GenoaroSJr/DesafioWatson#readme",
-  "dependencies": {
-    "dotenv": "^8.2.0",
-    "mysql": "^2.18.1",
-    "node": "^15.7.0",
-    "nodemon": "^2.0.7",
-    "say": "^0.16.0"
-  }
+    "name": "desafiowatson",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon server.js",
+        "migration": "node MigrationDB.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/GenoaroSJr/DesafioWatson.git"
+    },
+    "author": "GenoaroSJr",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/GenoaroSJr/DesafioWatson/issues"
+    },
+    "homepage": "https://github.com/GenoaroSJr/DesafioWatson#readme",
+    "dependencies": {
+        "dotenv": "^8.2.0",
+        "mysql": "^2.18.1",
+        "node": "^15.7.0",
+        "nodemon": "^2.0.7",
+        "say": "^0.16.0"
+    }
 }
