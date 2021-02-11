@@ -1,3 +1,5 @@
+var comments = [];
+
 function loadComments() {
     var xhttp = new XMLHttpRequest();
 
@@ -14,7 +16,6 @@ function loadComments() {
                 var message = document.createElement("P");
                 var buttom = document.createElement('buttom');
 
-                var comments = [];
                 comments[comment.ID] = comment.comment;
 
                 node.className = 'col-sm-9';
@@ -23,8 +24,8 @@ function loadComments() {
                 buttom.className = "btn btn-sm btn-outline-secondary fw-bold border-white";
                 buttom.id = comment.ID;
                 buttom.addEventListener("click", (e) => {
-                    console.log(comment.ID);
-                    console.log(comments[comment.ID]);
+                    console.log("ID: " + comment.ID + comments[comment.ID]);
+                    listenComment(comments[buttom.id]);
                 });
 
                 var textMessage = document.createTextNode(comment.comment);
@@ -45,6 +46,29 @@ function loadComments() {
 
     xhttp.open("GET", "/home", true);
     xhttp.send();
+}
+
+function listenComment(comment) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            //resultado da comunicação com o servidor;
+            //é o que o servidor volta para o front;
+            var result = this.responseURL;
+            //audio;
+            console.log("OK!!");
+            var audio = new Audio();
+            audio.src = result;
+            //var blobResult = new Blob([result], { type: 'audio/x-wav' });
+            //audio.src = blobResult;
+            audio.play();
+        }
+    }
+
+    console.log("OK! (1) " + comment);
+    xhttp.open("POST", "/audio", true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.send('{"message":"' + comment + '"}');
 }
 
 
