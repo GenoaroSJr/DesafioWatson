@@ -1,7 +1,13 @@
 const http = require('http');
 const fs = require('fs');
 const con = require("./DBConnection");
+const express = require('express');
+const app = express();
+const path = require("path");
+const port = '8081'
 
+
+// API
 const TextToSpeechV1 = require('ibm-watson/text-to-speech/v1');
 const { IamAuthenticator } = require('ibm-watson/auth');
 
@@ -10,9 +16,12 @@ const textToSpeech = new TextToSpeechV1({
     serviceUrl: process.env.API_URL
 });
 
-const hostname = 'localhost'
-const port = '8081'
+//ROTAS
+app.get('/', (req, res) => {
+    res.sendFile("index.html")
+});
 
+/*
 const server = http.createServer((req, res) => {
     if (req.method == 'GET' && req.url == '/') {
         res.statusCode = 200;
@@ -104,7 +113,7 @@ const server = http.createServer((req, res) => {
 
     }
 });
-
-server.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`)
-});
+*/
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`)
+})
