@@ -25,6 +25,8 @@ npm install
 DB_HOST=(YOUR_HOST)
 DB_USER=(YOUT_USER)
 DB_PASS=(YOUR_PASS)
+API_KEY=(YOUR_API_KEY)
+API_URL=(YOUR_API_URL)
 
 # Run migration:
 npm run migration
