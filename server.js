@@ -1,18 +1,36 @@
 const http = require('http');
 const fs = require('fs');
 const con = require("./DBConnection");
+const express = require("express")
+const handlebars = require('express-handlebars')
+const app = express();
 
+//API
 const TextToSpeechV1 = require('ibm-watson/text-to-speech/v1');
 const { IamAuthenticator } = require('ibm-watson/auth');
-
+const path = require('path/posix');
 const textToSpeech = new TextToSpeechV1({
     authenticator: new IamAuthenticator({ apikey: process.env.API_KEY }),
     serviceUrl: process.env.API_URL
 });
 
+//Handlebars
+app.engine('handlebars', handlebars({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+
+//server
 const hostname = 'localhost'
 const port = '8081'
 
+//public
+app.use(express.static(path.join(__dirname,"public")));
+
+app.get('/', (req,res) =>{
+    res.render("index")
+});
+
+
+/*
 const server = http.createServer((req, res) => {
     if (req.method == 'GET' && req.url == '/') {
         res.statusCode = 200;
@@ -103,8 +121,8 @@ const server = http.createServer((req, res) => {
         });
 
     }
-});
+}); */
 
-server.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`)
+app.listen(port, hostname, () => {
+    console.log('Server running at https://${hostname}:${port}/')
 });
