@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 var exec = require('child_process').exec;
-var cmd = 'mysql -u' + process.env.DB_USER + ' -p' + process.env.DB_PASS + ' < MigrationDB.sql';
+var cmd = 'mysql -u ' + process.env.DB_USER + ' -p ' + process.env.DB_PASS + ' < MigrationDB.sql';
 
 exec(cmd, function(error, stdout, stderr) {
     if (error) {
@@ -10,3 +10,4 @@ exec(cmd, function(error, stdout, stderr) {
         console.log("Migration success!");
     }
 });
+

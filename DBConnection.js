@@ -1,14 +1,16 @@
+//require('dotenv').config({path:__dirname+'/../.env'});
 require('dotenv').config();
-const mysql = require('mysql');
 
-function getConnection() {
-    var con = mysql.createConnection({
-        host: process.env.DB_HOST,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASS,
-        database: "comments"
-    });
-    return con;
-}
+const { Sequelize } = require("sequelize");
+const connection = new Sequelize('comments', process.env.DB_USER, process.env.DB_PASS, {
+    host: process.env.DB_HOST,
+    dialect: "mysql"
+});
 
-module.exports.getConnection = getConnection;
+/*connection.authenticate().then(()=>{
+    console.log("Conectado com sucesso")
+}).catch((er)=>{
+    console.log("Erro ao conectar",er);
+})*/
+
+module.exports = connection;
