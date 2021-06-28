@@ -1,9 +1,2 @@
-<<<<<<< HEAD
 /node_modules
 .env
-=======
-node_modules/
-.env
-audio.wav
-audioundefined.wav
->>>>>>> b619ae7d06fd4d172358bf16d6e2321bbf1ce14f

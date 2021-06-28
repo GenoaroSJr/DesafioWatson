@@ -1,14 +1,19 @@
-const http = require('http');
-const fs = require('fs');
-const con = require("./DBConnection");
+//const http = require('http');
+//const fs = require('fs');
+
+const path = require('path/posix');
 const express = require("express")
 const handlebars = require('express-handlebars')
 const app = express();
 
+//Banco
+const connection = require("./DBConnection");
+const Comments = require('./models/Texto');
+Comments.init(connection);
+
 //API
 const TextToSpeechV1 = require('ibm-watson/text-to-speech/v1');
 const { IamAuthenticator } = require('ibm-watson/auth');
-const path = require('path/posix');
 const textToSpeech = new TextToSpeechV1({
     authenticator: new IamAuthenticator({ apikey: process.env.API_KEY }),
     serviceUrl: process.env.API_URL
@@ -22,6 +27,7 @@ app.set('view engine', 'handlebars');
 const hostname = 'localhost'
 const port = '8081'
 
+
 //public
 app.use(express.static(path.join(__dirname,"public")));
 
@@ -29,6 +35,18 @@ app.get('/', (req,res) =>{
     res.render("index")
 });
 
+app.get('/data', (req,res) =>{
+    const resultado = Comments.findAll()
+    .then(()=>{
+        res.send(resultado)
+    })
+    .catch((er)=>{
+        console.log(er)
+        res.send("Erro", (er))
+    })
+    // 1° qual a função que faz isso?
+    // 2° como plotar em uma div especifica
+});
 
 /*
 const server = http.createServer((req, res) => {
@@ -124,5 +142,5 @@ const server = http.createServer((req, res) => {
 }); */
 
 app.listen(port, hostname, () => {
-    console.log('Server running at https://${hostname}:${port}/')
-});
+    console.log(`Server running at https://${hostname}:${port}/`)
+}); 
